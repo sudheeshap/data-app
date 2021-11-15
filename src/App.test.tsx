@@ -1,15 +1,25 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { cleanup } from '@testing-library/react';
+
 import App from './App';
+import { render } from './test-utils';
 
-test('renders learn react link', () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+describe('App', () => {
+  afterEach(() => {
+    cleanup();
+  });
 
-  expect(getByText(/learn/i)).toBeInTheDocument();
+  it('should render a layout component', () => {
+    const { getByTestId } = render(<App />);
+    const appHeader = getByTestId('app-header');
+
+    expect(appHeader).toBeInTheDocument();
+  });
+
+  it('should render a main element', () => {
+    const { getByTestId } = render(<App />);
+    const appMain = getByTestId('app-main');
+
+    expect(appMain).toBeInTheDocument();
+  });
 });

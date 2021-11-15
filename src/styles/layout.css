@@ -1,0 +1,26 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #eaebef;
+  color: #1d1d28;
+  font-size: 14px;
+  margin: 0;
+  font-family: 'Mukta', sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-height: 100%;
+  position: relative;
+}
+
+main {
+  flex-grow: 1;
+  max-width: 100%;
+}
