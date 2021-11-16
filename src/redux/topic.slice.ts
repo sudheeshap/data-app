@@ -3,8 +3,10 @@ import {
   createSlice,
   EntityState,
 } from '@reduxjs/toolkit';
+import { stat } from 'fs';
 
 import { TopicInterface } from '../shared/topic.interface';
+import { updateTopics } from './topic.thunks';
 
 export interface TopicStateInterface extends EntityState<TopicInterface> {}
 
@@ -19,9 +21,12 @@ export const topicSlice = createSlice({
   initialState,
   reducers: {
     addTopic: topicAdapter.addOne,
+    removeTopic: topicAdapter.removeOne,
+    updateAll: topicAdapter.updateMany,
+    setAll: topicAdapter.setAll,
   },
 });
 
-export const { addTopic } = topicSlice.actions;
+export const { addTopic, removeTopic, updateAll, setAll } = topicSlice.actions;
 
 export default topicSlice.reducer;

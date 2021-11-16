@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
+import tableReducer from './table.slice';
 import topicReducer from './topic.slice';
 
 export const store = configureStore({
   reducer: {
+    table: tableReducer,
     topic: topicReducer,
   },
 });

@@ -7,11 +7,13 @@ import { Dictionary } from '../../shared/dictionary.interface';
 interface TableProps {
   isSelectable: boolean;
   columns: TableColumnInterface[];
-  rows: Array<Dictionary<string>>;
+  rows: object;
   actions: ReactElement;
 }
 
 const Table = ({ isSelectable, columns, rows, actions }: TableProps) => {
+  const tableRows = rows as Array<Dictionary<string>>;
+
   return (
     <div className={styles.container}>
       <table>
@@ -30,7 +32,7 @@ const Table = ({ isSelectable, columns, rows, actions }: TableProps) => {
         </thead>
 
         <tbody>
-          {rows.map((row) => (
+          {tableRows.map((row) => (
             <tr key={row.id}>
               {isSelectable && (
                 <td>
