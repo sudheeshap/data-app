@@ -1,0 +1,28 @@
+.container {
+  background-color: #ffffff;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 40px;
+}
+
+.header {
+  font-size: 17px;
+}
+
+.subheader {
+  color: #aaaaaa;
+  font-size: 12px;
+}
+
+.input {
+  display: none;
+}
+
+.uploadContainer {
+  border: 1px dashed #b7d3f3;
+  background-color: #f2f4fb;
+  border-radius: 4px;
+  color: #7e90fe;
+  padding: 50px;
+  margin: 50px 0 20px;
+}

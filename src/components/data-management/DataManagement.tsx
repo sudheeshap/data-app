@@ -10,6 +10,7 @@ import { selectPagination } from '../../redux/table.selectors';
 import { TopicInterface } from '../../shared/topic.interface';
 import { updateTopics } from '../../redux/topic.thunks';
 import { selectTopicsPerPage } from '../../redux/topic.selectors';
+import Upload from '../upload/Upload';
 
 const DataManagement = () => {
   const dispatch = useAppDispatch();
@@ -121,6 +122,8 @@ const DataManagement = () => {
         currentPage={pagination.currentPage}
         totalPages={totalPages}
       />
+
+      <Upload />
     </section>
   );
 };
