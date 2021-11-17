@@ -9,7 +9,7 @@ export interface TableStateInterface {
 
 export const initialState: TableStateInterface = {
   pagination: {
-    perPage: 10,
+    perPage: 7,
     currentPage: 1,
     total: 0,
   },

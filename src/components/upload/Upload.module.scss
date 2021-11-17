@@ -41,14 +41,24 @@
 
 .error {
   text-align: center;
-  padding: 10px 0;
   color: $color-danger;
+}
+
+.dragContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .linkContainer {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+.uploadIcon {
+  color: $brand-color-fade;
+  font-size: 45px;
 }
 
 .footerButtons {
@@ -58,9 +68,14 @@
 }
 
 .btnClose {
+  border: none;
   position: absolute;
   top: -17px;
   right: -19px;
+}
+
+.btnClose i {
+  font-size: 30px;
 }
 
 .btnCancel,

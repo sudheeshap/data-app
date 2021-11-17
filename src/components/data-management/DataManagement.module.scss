@@ -54,3 +54,21 @@ button.iconButton.btnSmall i {
   background-color: $brand-color-medium;
   color: $brand-color-primary;
 }
+
+.uploadWrapper {
+  position: relative;
+}
+
+.uploadError {
+  background-color: $bg-primary;
+  color: $color-danger;
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+  margin-top: -130px;
+  position: relative;
+  margin: 0 auto;
+  max-width: 1000px;
+  margin-top: -115px;
+  z-index: 10;
+}

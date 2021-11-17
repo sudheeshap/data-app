@@ -8,7 +8,7 @@ const Sidebar = () => {
           <i className="bi bi-motherboard" />
         </div>
         <div className={styles.toggle}>
-          <i className="bi bi-motherboard" />
+          <i className="bi bi-arrows-fullscreen" />
         </div>
       </nav>
     </aside>

@@ -59,7 +59,7 @@ const Upload = ({
   const validateFile = (file: File) => {
     const type = fileType.replace('.', '');
 
-    if (file.type.indexOf(type) === -1) {
+    if (!file || file.type.indexOf(type) === -1) {
       setError('Invalid file');
 
       return false;
@@ -111,6 +111,7 @@ const Upload = ({
     setFileValidity(true);
     setError('');
     setFile(file);
+    setUploadActive(false);
   };
 
   /**
@@ -161,8 +162,6 @@ const Upload = ({
           />
         </h3>
         <div className={styles.subheader}>{description}</div>
-        <div className={styles.error}>{error}</div>
-
         <div
           className={`${styles.uploadContainer} ${
             dragOver ? styles.dragActive : ''
@@ -172,12 +171,15 @@ const Upload = ({
           onDragEnter={onDragEnter}
           onDragLeave={onDragLeave}
         >
-          <div className={styles.linkContainer}>
-            <span>Drag and drop your file OR </span>
-            <Button onClick={handleClickSelect} variant="link">
-              <span>Click</span>
-            </Button>
-            <span>here</span>
+          <div className={styles.dragContainer}>
+            <div className={styles.linkContainer}>
+              <span>Drag and drop your file OR </span>
+              <Button onClick={handleClickSelect} variant="link">
+                <span>Click</span>
+              </Button>
+              <span>here</span>
+            </div>
+            <i className={`${styles.uploadIcon} bi-cloud-upload-fill`} />
           </div>
           <input
             className={styles.input}
@@ -187,8 +189,8 @@ const Upload = ({
             onChange={handleChangeFile}
           ></input>
         </div>
-
-        {isUploadActive && <Progress percentage={progress} />}
+        <div className={styles.error}>{error}</div>
+        {!error && isUploadActive && <Progress percentage={progress} />}
       </form>
       <div className={styles.footerButtons}>
         <Button

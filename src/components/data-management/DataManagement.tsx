@@ -16,6 +16,20 @@ import { toggleUpload } from '../../redux/topic.slice';
 import Panel from '../panel/Panel';
 import styles from './DataManagement.module.scss';
 import Button from '../button/Button';
+import { useState } from 'react';
+
+// Max upload file size: 500 KB
+const uploadMaxFileSize = 1024 * 500;
+const uploadFileType = '.csv';
+const uploadDescription = 'Only upload csv files, and not more than 500 KB';
+
+const columns: TableColumnInterface[] = [
+  { key: 'id', text: 'Primary Key' },
+  { key: 'date', text: 'Date' },
+  { key: 'intention', text: 'Intention' },
+  { key: 'standard_question', text: 'Standard Question' },
+  { key: 'standard_answer', text: 'Standard answer' },
+];
 
 const DataManagement = () => {
   const dispatch = useAppDispatch();
@@ -23,32 +37,24 @@ const DataManagement = () => {
   const topicsPerPage = useAppSelector(selectTopicsPerPage);
   const isUploadActive = useAppSelector(selectIsUploadActive);
 
-  // Max upload file size: 500 KB
-  const uploadMaxFileSize = 1024 * 500;
-  const uploadFileType = '.csv';
-  const uploadDescription = 'Only upload csv files, and not more than 500 KB';
-
-  const columns: TableColumnInterface[] = [
-    { key: 'id', text: 'Primary Key' },
-    { key: 'date', text: 'Date' },
-    { key: 'intention', text: 'Intention' },
-    { key: 'standard_question', text: 'Standard Question' },
-    { key: 'standard_answer', text: 'Standard answer' },
-  ];
-
-  const perPage = pagination.perPage;
-  const totalRows = pagination.total;
-
   const { totalPages, nextPage, prevPage, setPage } = usePagination({
-    perPage,
-    total: totalRows,
+    perPage: pagination.perPage,
+    total: pagination.total,
   });
+
+  const [uploadError, setUploadError] = useState<string>('');
 
   /**
    * Clicked to show upload section
    */
   const handleClickUpload = () => {
     dispatch(toggleUpload(true));
+    dispatch(
+      updatePagination({
+        ...pagination,
+        currentPage: 1,
+      }),
+    );
   };
 
   /**
@@ -94,9 +100,23 @@ const DataManagement = () => {
   };
 
   /**
+   * Validate topics
+   */
+  const isValidTopic = (data: object[]) => {
+    // All of the valid columns available in the data?
+    return data[0] && columns.map((c) => c.key).every((key) => key in data[0]);
+  };
+
+  /**
    * Upload topics
    */
   const handleUpload = (data: object[]) => {
+    if (!isValidTopic(data)) {
+      setUploadError('Selected CSV file does not have valid fields');
+      return;
+    }
+
+    setUploadError('');
     dispatch(updateTopics(data as TopicInterface[]));
   };
 
@@ -171,13 +191,18 @@ const DataManagement = () => {
       )}
 
       {isUploadActive && (
-        <Upload
-          fileType={uploadFileType}
-          maxFileSize={uploadMaxFileSize}
-          description={uploadDescription}
-          onUpload={handleUpload}
-          onClose={handleUploadClose}
-        />
+        <div className={styles.uploadWrapper}>
+          <Upload
+            fileType={uploadFileType}
+            maxFileSize={uploadMaxFileSize}
+            description={uploadDescription}
+            onUpload={handleUpload}
+            onClose={handleUploadClose}
+          />
+          {uploadError && (
+            <div className={styles.uploadError}>{uploadError}</div>
+          )}
+        </div>
       )}
     </section>
   );
