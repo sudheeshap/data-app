@@ -149,49 +149,47 @@ const Upload = ({
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <form>
-          <h3 className={styles.header}>
-            <span>Upload data</span>
-            <Button
-              className={styles.btnClose}
-              onClick={handleClickCancel}
-              variant="default"
-              icon="bi-x"
-            />
-          </h3>
-          <div className={styles.subheader}>{description}</div>
-          <div className={styles.error}>{error}</div>
+    <div className={styles.container}>
+      <form className={styles.form}>
+        <h3 className={styles.header}>
+          <span>Upload data</span>
+          <Button
+            className={styles.btnClose}
+            onClick={handleClickCancel}
+            variant="default"
+            icon="bi-x"
+          />
+        </h3>
+        <div className={styles.subheader}>{description}</div>
+        <div className={styles.error}>{error}</div>
 
-          <div
-            className={`${styles.uploadContainer} ${
-              dragOver ? styles.dragActive : ''
-            }`}
-            onDrop={handleDrop}
-            onDragOver={onDragOver}
-            onDragEnter={onDragEnter}
-            onDragLeave={onDragLeave}
-          >
-            <div className={styles.linkContainer}>
-              <span>Drag and drop your file OR </span>
-              <Button onClick={handleClickSelect} variant="link">
-                <span>Click</span>
-              </Button>
-              <span>here</span>
-            </div>
-            <input
-              className={styles.input}
-              ref={hiddenFileInput}
-              type="file"
-              accept={fileType}
-              onChange={handleChangeFile}
-            ></input>
+        <div
+          className={`${styles.uploadContainer} ${
+            dragOver ? styles.dragActive : ''
+          }`}
+          onDrop={handleDrop}
+          onDragOver={onDragOver}
+          onDragEnter={onDragEnter}
+          onDragLeave={onDragLeave}
+        >
+          <div className={styles.linkContainer}>
+            <span>Drag and drop your file OR </span>
+            <Button onClick={handleClickSelect} variant="link">
+              <span>Click</span>
+            </Button>
+            <span>here</span>
           </div>
+          <input
+            className={styles.input}
+            ref={hiddenFileInput}
+            type="file"
+            accept={fileType}
+            onChange={handleChangeFile}
+          ></input>
+        </div>
 
-          {isUploadActive && <Progress percentage={progress} />}
-        </form>
-      </div>
+        {isUploadActive && <Progress percentage={progress} />}
+      </form>
       <div className={styles.footerButtons}>
         <Button
           className={styles.btnCancel}
@@ -209,7 +207,7 @@ const Upload = ({
           <span>Upload</span>
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 
