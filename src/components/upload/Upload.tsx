@@ -57,6 +57,14 @@ const Upload = ({
    * File validation
    */
   const validateFile = (file: File) => {
+    const type = fileType.replace('.', '');
+
+    if (file.type.indexOf(type) === -1) {
+      setError('Invalid file');
+
+      return false;
+    }
+
     if (file.size > maxFileSize) {
       setError(`Fize size exceeds ${maxFileSize / 1024} KB`);
 
@@ -87,6 +95,13 @@ const Upload = ({
     const file: File = (event.target as EventTarget & { files: FileList })
       .files[0];
 
+    handleFile(file);
+  };
+
+  /**
+   * Handle file operation
+   */
+  const handleFile = (file: File) => {
     if (!validateFile(file)) {
       setFileValidity(false);
 
@@ -124,17 +139,13 @@ const Upload = ({
     event.preventDefault();
     event.stopPropagation();
 
-    console.log(event);
-
     setDragOver(false);
 
-    // let files = [...e.dataTransfer.files];
+    if (event?.dataTransfer?.files?.length > 0) {
+      handleFile(event.dataTransfer.files[0]);
 
-    // if (event?.dataTransfer?.files?.length > 0) {
-    //   console.log(e.dataTransfer.files);
-
-    //   event.dataTransfer.clearData();
-    // }
+      event.dataTransfer.clearData();
+    }
   };
 
   return (
