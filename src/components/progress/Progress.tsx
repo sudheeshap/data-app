@@ -1,4 +1,4 @@
-import styles from './Progress.module.css';
+import styles from './Progress.module.scss';
 
 interface ProgressProps {
   percentage: number;

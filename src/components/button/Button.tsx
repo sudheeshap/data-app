@@ -5,7 +5,7 @@ import styles from './Button.module.scss';
 export interface ButtonProps {
   children?: ReactNode;
   testId?: string;
-  variant?: 'link' | 'dark';
+  variant?: 'link' | 'dark' | 'danger' | 'default';
   icon?: string;
   className?: string;
   tooltip?: string;

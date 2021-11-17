@@ -1,6 +1,7 @@
 import React, { FC, useMemo, useState } from 'react';
+import Button from '../button/Button';
 
-import styles from './Pagination.module.css';
+import styles from './Pagination.module.scss';
 
 interface PaginationProps {
   nextPage: () => void;
@@ -52,23 +53,30 @@ const Pagination: FC<PaginationProps> = ({
 
   return (
     <div className={styles.container}>
-      <button onClick={handlePrevPage} disabled={currentPage === 1}>
-        <i className="bi bi-caret-left-fill" />
-      </button>
+      <Button
+        icon="bi bi-caret-left-fill"
+        variant="default"
+        onClick={handlePrevPage}
+        isDisabled={currentPage === 1}
+      />
       {pageNumbers.map((num) => (
-        <button
-          onClick={() => setPage(num)}
+        <Button
           key={num}
           className={`${styles.pageNumber} ${
             currentPage === num ? styles.active : ''
           }`}
+          variant="default"
+          onClick={() => setPage(num)}
         >
           {num}
-        </button>
+        </Button>
       ))}
-      <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-        <i className="bi bi-caret-right-fill" />
-      </button>
+      <Button
+        icon="bi bi-caret-right-fill"
+        variant="default"
+        onClick={handleNextPage}
+        isDisabled={currentPage === totalPages}
+      />
     </div>
   );
 };

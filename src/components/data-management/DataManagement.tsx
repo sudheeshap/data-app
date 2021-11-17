@@ -14,6 +14,8 @@ import {
 import Upload from '../upload/Upload';
 import { toggleUpload } from '../../redux/topic.slice';
 import Panel from '../panel/Panel';
+import styles from './DataManagement.module.scss';
+import Button from '../button/Button';
 
 const DataManagement = () => {
   const dispatch = useAppDispatch();
@@ -107,11 +109,16 @@ const DataManagement = () => {
 
   const renderActions = () => {
     return (
-      <>
-        <button>Edit</button>
-        <button>Delete</button>
-        <button>...</button>
-      </>
+      <div className={styles.actionGroup}>
+        <Button className={styles.btnSmall}>Edit</Button>
+        <Button className={styles.btnSmall} variant="danger">
+          Delete
+        </Button>
+        <Button
+          className={`${styles.iconButton} ${styles.btnSmall}`}
+          icon="bi-three-dots-vertical"
+        />
+      </div>
     );
   };
 
@@ -120,17 +127,30 @@ const DataManagement = () => {
       {!isUploadActive && (
         <>
           <Panel>
-            <div>
-              <i className="bi bi-check" />
+            <div className={styles.panelHeader}>
+              <i className="bi bi-motherboard" />
               <span>Data Management</span>
             </div>
           </Panel>
           <Panel>
-            <div>
-              <button onClick={handleClickUpload}>
-                <span>Upload Data</span>
-                <i className="bi bi-check" />
-              </button>
+            <div className={styles.actionContainer}>
+              <div>
+                <Button icon="bi-upload" onClick={handleClickUpload}>
+                  <span>Upload Data</span>
+                </Button>
+              </div>
+              <div className={styles.rightActions}>
+                <Button
+                  className={`${styles.iconButton} ${styles.btnDelete}`}
+                  icon="bi-trash"
+                />
+                <Button className={styles.btnNew} icon="bi-terminal-plus">
+                  <span>New</span>
+                </Button>
+                <Button icon="bi-bezier">
+                  <span>Train</span>
+                </Button>
+              </div>
             </div>
           </Panel>
           <Table

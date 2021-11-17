@@ -33,16 +33,46 @@
   background-color: $bg-secondary;
 }
 
+.danger {
+  background-color: $color-danger-light;
+  color: $color-danger;
+}
+
+.danger:hover {
+  background-color: transparent;
+  color: $color-danger;
+}
+
+.default {
+  background-color: transparent;
+  border: 1px solid $border-color2;
+  color: $color-primary;
+}
+
+.default:disabled {
+  background-color: transparent;
+}
+
+.default:hover {
+  color: $color-primary;
+  background-color: $brand-color-light;
+}
+
+.default i {
+  color: $bg-secondary;
+}
+
 .link {
   background: none;
   box-shadow: none;
   color: $brand-color-primary;
   text-decoration: underline;
+  padding: 2px 5px;
 }
 
 .link:hover {
   background: none;
-  color: $brand-color-medium;
+  color: $brand-color-fade;
 }
 
 .iconButton {
@@ -54,7 +84,6 @@
 }
 
 .button:disabled {
-  background: #1d1d28;
   box-shadow: none;
   color: $bg-disabled;
   opacity: 0.2;

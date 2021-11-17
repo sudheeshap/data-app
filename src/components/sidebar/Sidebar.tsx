@@ -1,10 +1,15 @@
-import styles from './Sidebar.module.css';
+import styles from './Sidebar.module.scss';
 
 const Sidebar = () => {
   return (
     <aside className={styles.container}>
       <nav>
-        <button>icon</button>
+        <div className={`${styles.link} ${styles.active}`}>
+          <i className="bi bi-motherboard" />
+        </div>
+        <div className={styles.toggle}>
+          <i className="bi bi-motherboard" />
+        </div>
       </nav>
     </aside>
   );

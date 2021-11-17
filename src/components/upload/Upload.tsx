@@ -9,9 +9,10 @@ import {
 } from 'react';
 
 import Progress from '../progress/Progress';
-import styles from './Upload.module.css';
+import styles from './Upload.module.scss';
 import useDragAndDrop from '../../hooks/use-draganddrop';
 import useFileReader from '../../hooks/use-filereader';
+import Button from '../button/Button';
 
 interface UploadProps {
   fileType: string;
@@ -57,7 +58,7 @@ const Upload = ({
    */
   const validateFile = (file: File) => {
     if (file.size > maxFileSize) {
-      setError(`Fize size exceeds ${maxFileSize} KB`);
+      setError(`Fize size exceeds ${maxFileSize / 1024} KB`);
 
       return false;
     }
@@ -137,47 +138,67 @@ const Upload = ({
   };
 
   return (
-    <div className={styles.container}>
-      <form>
-        <h3 className={styles.header}>Upload data</h3>
-        <div className={styles.subheader}>{description}</div>
-        <div className={styles.error}>{error}</div>
+    <>
+      <div className={styles.container}>
+        <form>
+          <h3 className={styles.header}>
+            <span>Upload data</span>
+            <Button
+              className={styles.btnClose}
+              onClick={handleClickCancel}
+              variant="default"
+              icon="bi-x"
+            />
+          </h3>
+          <div className={styles.subheader}>{description}</div>
+          <div className={styles.error}>{error}</div>
 
-        <div
-          className={`${styles.uploadContainer} ${
-            dragOver ? styles.dragActive : ''
-          }`}
-          onDrop={handleDrop}
-          onDragOver={onDragOver}
-          onDragEnter={onDragEnter}
-          onDragLeave={onDragLeave}
-        >
-          <div>
-            <span>Drag and drop your file OR </span>
-            <button onClick={handleClickSelect}>Click</button>
-            <span>here</span>
+          <div
+            className={`${styles.uploadContainer} ${
+              dragOver ? styles.dragActive : ''
+            }`}
+            onDrop={handleDrop}
+            onDragOver={onDragOver}
+            onDragEnter={onDragEnter}
+            onDragLeave={onDragLeave}
+          >
+            <div className={styles.linkContainer}>
+              <span>Drag and drop your file OR </span>
+              <Button onClick={handleClickSelect} variant="link">
+                <span>Click</span>
+              </Button>
+              <span>here</span>
+            </div>
+            <input
+              className={styles.input}
+              ref={hiddenFileInput}
+              type="file"
+              accept={fileType}
+              onChange={handleChangeFile}
+            ></input>
           </div>
-          <input
-            className={styles.input}
-            ref={hiddenFileInput}
-            type="file"
-            accept={fileType}
-            onChange={handleChangeFile}
-          ></input>
-        </div>
 
-        {isUploadActive && <Progress percentage={progress} />}
-
-        <button onClick={handleClickCancel}>X</button>
-        <button onClick={handleClickCancel}>Cancel</button>
-        <button
-          disabled={!isValidFile || isUploadActive}
+          {isUploadActive && <Progress percentage={progress} />}
+        </form>
+      </div>
+      <div className={styles.footerButtons}>
+        <Button
+          className={styles.btnCancel}
+          onClick={handleClickCancel}
+          variant="dark"
+        >
+          {isUploadActive && <span>Close</span>}
+          {!isUploadActive && <span>Cancel</span>}
+        </Button>
+        <Button
+          isDisabled={!isValidFile || isUploadActive}
+          className={styles.btnUpload}
           onClick={handleClickUpload}
         >
-          Upload
-        </button>
-      </form>
-    </div>
+          <span>Upload</span>
+        </Button>
+      </div>
+    </>
   );
 };
 
