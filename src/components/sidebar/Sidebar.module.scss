@@ -1,0 +1,47 @@
+@import '../../styles/variables.scss';
+
+.container {
+  display: none;
+  background-color: $bg-primary;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 80px;
+  width: 60px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+nav {
+  height: 100%;
+  position: relative;
+}
+
+.link {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.link.active {
+  background: $brand-color-light;
+  color: $brand-color-primary;
+  border-left: 3px solid $brand-color-primary;
+}
+
+.toggle {
+  cursor: pointer;
+  font-size: 21px;
+  color: $bg-secondary;
+  position: absolute;
+  left: 17px;
+  bottom: 20px;
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    display: block;
+  }
+}

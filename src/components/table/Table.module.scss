@@ -1,0 +1,44 @@
+@import '../../styles/variables.scss';
+
+.container {
+  box-shadow: 1px 1px 3px $shadow-color-light;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.header {
+  background-color: $header-color;
+}
+
+.headerCell {
+  padding: 11px 15px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.rowCell {
+  padding: 13px 15px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 150px;
+}
+
+.emptyState {
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tableRow {
+  background-color: $bg-primary;
+}
+
+.tableRow:nth-child(even) {
+  background-color: $brand-color-light;
+}

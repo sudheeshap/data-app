@@ -1,0 +1,8 @@
+@import '../../styles/variables.scss';
+
+.container {
+  background: $bg-primary;
+  padding: 15px 10px;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 3px $shadow-color-light;
+}

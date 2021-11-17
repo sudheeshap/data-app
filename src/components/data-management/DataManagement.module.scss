@@ -1,0 +1,56 @@
+@import '../../styles/variables.scss';
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 16px;
+  font-weight: 500;
+  color: $brand-color-primary;
+}
+
+.panelHeader i {
+  font-size: 20px;
+  margin: 3px 10px;
+}
+
+.actionContainer,
+.rightActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionGroup {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+button.btnSmall {
+  border-radius: 3px;
+  font-size: 10px;
+  padding: 5px 10px;
+  margin-right: 5px;
+}
+
+button.iconButton.btnSmall {
+  background-color: $bg-primary;
+  border: 1px solid $border-color;
+  padding: 5px;
+}
+
+button.iconButton.btnSmall i {
+  font-size: 10px;
+  color: $bg-disabled;
+}
+
+.btnNew,
+.btnDelete {
+  margin-right: 10px;
+}
+
+.iconButton.btnDelete {
+  background-color: $brand-color-medium;
+  color: $brand-color-primary;
+}

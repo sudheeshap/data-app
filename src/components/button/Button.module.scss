@@ -1,0 +1,100 @@
+@import '../../styles/variables.scss';
+
+.button {
+  background-color: $brand-color-primary;
+  color: $bg-primary;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  padding: 6px 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color ease-out 100ms;
+}
+
+.button:hover {
+  background-color: $brand-color-fade;
+}
+
+.dark {
+  background-color: $color-primary;
+  color: $bg-primary;
+}
+
+.button.dark:disabled {
+  background-color: $bg-primary;
+  color: $bg-secondary;
+  opacity: 1;
+}
+
+.dark:hover {
+  background-color: $bg-secondary;
+}
+
+.danger {
+  background-color: $color-danger-light;
+  color: $color-danger;
+}
+
+.danger:hover {
+  background-color: transparent;
+  color: $color-danger;
+}
+
+.default {
+  background-color: transparent;
+  border: 1px solid $border-color2;
+  color: $color-primary;
+}
+
+.default:disabled {
+  background-color: transparent;
+}
+
+.default:hover {
+  color: $color-primary;
+  background-color: $brand-color-light;
+}
+
+.default i {
+  color: $bg-secondary;
+}
+
+.link {
+  background: none;
+  box-shadow: none;
+  color: $brand-color-primary;
+  text-decoration: underline;
+  padding: 2px 5px;
+}
+
+.link:hover {
+  background: none;
+  color: $brand-color-fade;
+}
+
+.iconButton {
+  padding: 5px;
+}
+
+.iconButton .icon {
+  margin: 0;
+}
+
+.button:disabled {
+  box-shadow: none;
+  color: $bg-disabled;
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.icon {
+  margin-left: 15px;
+  font-size: 16px;
+}
+
+.dark .icon {
+  display: none;
+}

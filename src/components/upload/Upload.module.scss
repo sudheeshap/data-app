@@ -1,0 +1,67 @@
+@import '../../styles/variables.scss';
+
+.container {
+  background-color: $bg-primary;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  position: relative;
+  margin-top: 130px;
+}
+
+.header {
+  font-size: 17px;
+  position: relative;
+}
+
+.subheader {
+  color: $bg-disabled;
+  font-size: 12px;
+}
+
+.input {
+  display: none;
+}
+
+.uploadContainer {
+  border: 1px dashed $brand-color-primary;
+  background-color: $brand-color-light;
+  border-radius: 4px;
+  color: $brand-color-fade;
+  padding: 50px;
+  margin: 50px 0 20px;
+}
+
+.dragActive {
+  background-color: $bg-success;
+}
+
+.error {
+  text-align: center;
+  padding: 10px 0;
+  color: $color-danger;
+}
+
+.linkContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.footerButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btnClose {
+  position: absolute;
+  top: -17px;
+  right: -19px;
+}
+
+.btnCancel,
+.btnUpload {
+  width: 50%;
+  height: 40px;
+}
