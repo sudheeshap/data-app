@@ -1,13 +1,73 @@
-import { ChangeEvent, useState, MouseEvent, useRef, DragEvent } from 'react';
+import {
+  ChangeEvent,
+  useState,
+  MouseEvent,
+  useRef,
+  DragEvent,
+  useEffect,
+  useMemo,
+} from 'react';
 
 import Progress from '../progress/Progress';
 import styles from './Upload.module.css';
+import useDragAndDrop from '../../hooks/use-draganddrop';
+import useFileReader from '../../hooks/use-filereader';
 
-export default function Upload() {
-  const [csvFile, setCsvFile] = useState<File>();
-  const [progress, setProgress] = useState<number>(0);
+interface UploadProps {
+  fileType: string;
+  maxFileSize: number;
+  description: string;
+  onUpload: (data: object[]) => void;
+  onClose: () => void;
+}
+
+const Upload = ({
+  fileType,
+  maxFileSize,
+  description,
+  onUpload,
+  onClose,
+}: UploadProps) => {
+  const [file, setFile] = useState<File | null>(null);
+  const [error, setError] = useState<string>();
+  const [isValidFile, setFileValidity] = useState<boolean>(false);
+  const [isUploadActive, setUploadActive] = useState<boolean>(false);
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
+  const { dragOver, setDragOver, onDragEnter, onDragOver, onDragLeave } =
+    useDragAndDrop();
+  const { progress, data, setData } = useFileReader(
+    useMemo(() => file, [file]),
+    isUploadActive,
+  );
+
+  useEffect(() => {
+    if (!data || !isUploadActive) {
+      return;
+    }
+
+    onUpload(data);
+
+    setFile(null);
+    setData(null);
+  }, [data, isUploadActive, setData, onUpload]);
+
+  /**
+   * File validation
+   */
+  const validateFile = (file: File) => {
+    if (file.size > maxFileSize) {
+      setError(`Fize size exceeds ${maxFileSize} KB`);
+
+      return false;
+    }
+
+    return true;
+  };
+
+  /**
+   * Clicked on file selection button
+   */
   const handleClickSelect = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -19,69 +79,53 @@ export default function Upload() {
     hiddenFileInput.current.click();
   };
 
+  /**
+   * File selected
+   */
   const handleChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
     const file: File = (event.target as EventTarget & { files: FileList })
       .files[0];
 
-    console.log(file);
+    if (!validateFile(file)) {
+      setFileValidity(false);
 
-    setCsvFile(file);
+      return;
+    }
+
+    setFileValidity(true);
+    setError('');
+    setFile(file);
   };
 
-  const handleClickParse = (event: MouseEvent<HTMLButtonElement>) => {
+  /**
+   * Clicked for file upload
+   */
+  const handleClickUpload = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    parse();
+    setUploadActive(true);
   };
 
-  const parse = () => {
-    const file = csvFile;
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-      const text = (e.target as FileReader).result;
-
-      console.log(text);
-    };
-
-    reader.onprogress = function (event) {
-      if (event.lengthComputable) {
-        var percentage = (event.loaded / event.total) * 100;
-
-        console.log(percentage);
-
-        setProgress(percentage);
-      }
-    };
-
-    if (file) {
-      reader.readAsText(file);
-    }
-  };
-
+  /**
+   * Clicked cancel
+   */
   const handleClickCancel = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    parse();
+    setUploadActive(false);
+    onClose();
   };
 
-  const handleDragEnter = (event: DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-  };
-  const handleDragLeave = (event: DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-  };
-  const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-  };
+  /**
+   * File droped to the container
+   */
   const handleDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
     console.log(event);
+
+    setDragOver(false);
 
     // let files = [...e.dataTransfer.files];
 
@@ -96,16 +140,17 @@ export default function Upload() {
     <div className={styles.container}>
       <form>
         <h3 className={styles.header}>Upload data</h3>
-        <div className={styles.subheader}>
-          Only upload csv files, and not more than 500kb
-        </div>
+        <div className={styles.subheader}>{description}</div>
+        <div className={styles.error}>{error}</div>
 
         <div
-          className={styles.uploadContainer}
+          className={`${styles.uploadContainer} ${
+            dragOver ? styles.dragActive : ''
+          }`}
           onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragEnter={handleDragEnter}
-          onDragLeave={handleDragLeave}
+          onDragOver={onDragOver}
+          onDragEnter={onDragEnter}
+          onDragLeave={onDragLeave}
         >
           <div>
             <span>Drag and drop your file OR </span>
@@ -116,17 +161,24 @@ export default function Upload() {
             className={styles.input}
             ref={hiddenFileInput}
             type="file"
-            accept=".csv"
+            accept={fileType}
             onChange={handleChangeFile}
           ></input>
         </div>
 
-        <Progress percentage={progress} />
+        {isUploadActive && <Progress percentage={progress} />}
 
         <button onClick={handleClickCancel}>X</button>
         <button onClick={handleClickCancel}>Cancel</button>
-        <button onClick={handleClickParse}>Upload</button>
+        <button
+          disabled={!isValidFile || isUploadActive}
+          onClick={handleClickUpload}
+        >
+          Upload
+        </button>
       </form>
     </div>
   );
-}
+};
+
+export default Upload;

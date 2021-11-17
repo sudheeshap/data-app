@@ -3,18 +3,18 @@ import {
   createSlice,
   EntityState,
 } from '@reduxjs/toolkit';
-import { stat } from 'fs';
 
 import { TopicInterface } from '../shared/topic.interface';
-import { updateTopics } from './topic.thunks';
 
-export interface TopicStateInterface extends EntityState<TopicInterface> {}
+export interface TopicStateInterface extends EntityState<TopicInterface> {
+  isUploadActive: boolean;
+}
 
 export const topicAdapter = createEntityAdapter<TopicInterface>();
 
-export const initialState: TopicStateInterface = topicAdapter.getInitialState(
-  {},
-);
+export const initialState: TopicStateInterface = topicAdapter.getInitialState({
+  isUploadActive: false,
+});
 
 export const topicSlice = createSlice({
   name: 'topic',
@@ -24,9 +24,13 @@ export const topicSlice = createSlice({
     removeTopic: topicAdapter.removeOne,
     updateAll: topicAdapter.updateMany,
     setAll: topicAdapter.setAll,
+    toggleUpload: (state, action) => {
+      state.isUploadActive = action.payload;
+    },
   },
 });
 
-export const { addTopic, removeTopic, updateAll, setAll } = topicSlice.actions;
+export const { addTopic, removeTopic, updateAll, setAll, toggleUpload } =
+  topicSlice.actions;
 
 export default topicSlice.reducer;
