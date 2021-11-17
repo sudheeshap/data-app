@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 html,
 body {
   height: 100%;
@@ -5,8 +7,8 @@ body {
 }
 
 body {
-  background-color: #eaebef;
-  color: #1d1d28;
+  background-color: $body-bg-color;
+  color: $color-primary;
   font-size: 14px;
   margin: 0;
   font-family: 'Mukta', sans-serif;
@@ -21,12 +23,21 @@ body {
 
 main {
   flex-grow: 1;
-  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
+  padding-top: 40px;
+  box-sizing: border-box;
 }
 
 main > section {
   padding: 0 20px;
+}
+
+@media screen and (min-width: 800px) {
+  main {
+    max-width: 1000px;
+    padding: 40px 0 0 60px;
+  }
 }
 
 @media screen and (min-width: 1100px) {
