@@ -29,10 +29,20 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Screenshots
 
-<img width="1436" alt="Screenshot 2021-11-17 at 9 52 34 PM" src="https://user-images.githubusercontent.com/2399689/142255593-9eb298a5-4365-4d8d-b322-9fb03c14a8b2.png">
+<img width="1440" alt="Screenshot 2021-11-18 at 10 02 53 PM" src="https://user-images.githubusercontent.com/2399689/142471883-ebdd39e7-e861-409e-a9d9-74050597d476.png">
 
-<img width="1440" alt="Screenshot 2021-11-17 at 9 52 48 PM" src="https://user-images.githubusercontent.com/2399689/142255619-12b937fc-1f82-4878-ac02-7cf25d37413e.png">
-<img width="1440" alt="Screenshot 2021-11-17 at 9 53 02 PM" src="https://user-images.githubusercontent.com/2399689/142255645-30adccd7-4446-4bac-9647-7af5d982a44e.png">
-<img width="1438" alt="Screenshot 2021-11-17 at 9 53 15 PM" src="https://user-images.githubusercontent.com/2399689/142255660-c0ce8efd-cbc3-418f-a251-3fac967f5591.png">
-<img width="1440" alt="Screenshot 2021-11-17 at 9 53 37 PM" src="https://user-images.githubusercontent.com/2399689/142255682-5af9b4fd-9158-4113-a519-c2f3c18e569a.png">
-<img width="1438" alt="Screenshot 2021-11-17 at 9 53 51 PM" src="https://user-images.githubusercontent.com/2399689/142255705-df78d451-ac33-43df-89e7-1ed53682152d.png">
+<img width="1440" alt="Screenshot 2021-11-18 at 10 03 05 PM" src="https://user-images.githubusercontent.com/2399689/142471892-4bd6f709-883b-4e5b-8b2c-c573902c2d98.png">
+
+<img width="1440" alt="Screenshot 2021-11-18 at 10 03 25 PM" src="https://user-images.githubusercontent.com/2399689/142471905-a27a8184-0fbd-47c0-a16c-d8c7bed398a7.png">
+
+<img width="1440" alt="Screenshot 2021-11-18 at 10 03 41 PM" src="https://user-images.githubusercontent.com/2399689/142471926-27018d45-441f-4193-bcac-ef0b78ce0a25.png">
+
+<img width="1440" alt="Screenshot 2021-11-18 at 10 03 54 PM" src="https://user-images.githubusercontent.com/2399689/142471932-4ebc39db-f20c-43df-949f-5d1860034cdc.png">
+
+<img width="1440" alt="Screenshot 2021-11-18 at 10 04 06 PM" src="https://user-images.githubusercontent.com/2399689/142471952-5076e163-b9fe-44a7-8c0e-0644df7f10f4.png">
+
+
+
+
+
+
